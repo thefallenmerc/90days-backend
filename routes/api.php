@@ -17,7 +17,6 @@ Route::post('/login', 'Api\AuthController@login');
 Route::post('/register', 'Api\AuthController@register');
 
 Route::middleware(['auth:api'])->group(function () {
-
     Route::get('/user/detail', 'Api\AuthController@details');
 
     // Resolution
