@@ -42,6 +42,7 @@ class ResolutionController extends Controller
 
         $data = $validator->validated();
         $data['user_id'] = Auth::user()->id;
+        $data['deadline'] = $request->deadline . " 00:00:00";
         $resolution = Resolution::create($data);
         // $resolution->completed = (int) $request->completed;
         return response()->json(['success' => $resolution], 201);
