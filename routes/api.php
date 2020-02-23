@@ -13,15 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/login', 'Api\AuthController@login');
-Route::post('/register', 'Api\AuthController@register');
+Route::middleware('cors')->group(function() {
 
-Route::middleware(['auth:api'])->group(function () {
-    Route::get('/user/detail', 'Api\AuthController@details');
+    Route::post('/login', 'Api\AuthController@login');
+    Route::post('/register', 'Api\AuthController@register');
 
-    // Resolution
-    Route::get('/resolutions', 'Api\ResolutionController@index');
-    Route::post('/resolutions', 'Api\ResolutionController@store');
-    Route::put('/resolutions/{id}', 'Api\ResolutionController@update');
-    Route::delete('/resolutions/{id}', 'Api\ResolutionController@destroy');
+    Route::middleware(['auth:api'])->group(function () {
+        Route::get('/user/detail', 'Api\AuthController@details');
+
+        // Resolution
+        Route::get('/resolutions', 'Api\ResolutionController@index');
+        Route::post('/resolutions', 'Api\ResolutionController@store');
+        Route::put('/resolutions/{id}', 'Api\ResolutionController@update');
+        Route::delete('/resolutions/{id}', 'Api\ResolutionController@destroy');
+    });
 });
